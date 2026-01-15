@@ -31,3 +31,10 @@ jobs:
             -Dsonar.projectKey=my-java-app \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
+
+      - name: Deploy to Nexus
+        env:
+          NEXUS_USER: ${{ secrets.NEXUS_USER }}
+          NEXUS_PASS: ${{ secrets.NEXUS_PASS }}
+        run: |
+          mvn deploy -s .github/maven-settings.xml
